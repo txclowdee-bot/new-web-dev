@@ -106,3 +106,9 @@ Next steps (recommended):
 - Review all copy with a compliance/legal professional before marketing.
 
 License: Use this starter as you like, but follow laws and platform policies.
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
+}
