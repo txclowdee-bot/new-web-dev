@@ -264,3 +264,45 @@ export default function Hero() {
     </section>
   );
 }
+import { useState } from 'react';
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
+import { ethers } from 'ethers';
+
+// NOTE: This is a non-custodial wallet connect UI example for educational/demonstration only.
+// Do NOT prompt users to reveal private keys or seed phrases. Add your RPC provider (INFURA/Alchemy)
+// by setting DEFAULT_ETH_JSONRPC_URL or use wallet provider selection in production.
+
+export default function ConnectButton() {
+  const [address, setAddress] = useState<string | null>(null);
+
+  async function connectCoinbase() {
+    try {
+      const APP_NAME = 'MetisFutures';
+      const APP_LOGO_URL = '/logo.svg';
+      const DEFAULT_ETH_JSONRPC_URL = process.env.NEXT_PUBLIC_RPC_URL || 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY';
+      const DEFAULT_CHAIN_ID = 1;
+
+      const coinbaseWallet = new CoinbaseWalletSDK({
+        appName: APP_NAME,
+        appLogoUrl: APP_LOGO_URL,
+        darkMode: false
+      });
+
+      const provider = coinbaseWallet.makeWeb3Provider(DEFAULT_ETH_JSONRPC_URL, DEFAULT_CHAIN_ID) as any;
+      await provider.request({ method: 'eth_requestAccounts' });
+      const web3provider = new ethers.BrowserProvider(provider);
+      const signer = await web3provider.getSigner();
+      const addr = await signer.getAddress();
+      setAddress(addr);
+    } catch (err) {
+      console.error('Wallet connect error', err);
+      alert('Unable to connect to wallet. Check the console for details and that you have set NEXT_PUBLIC_RPC_URL if needed.');
+    }
+  }
+
+  return (
+    <button onClick={connectCoinbase} className="bg-blue-600 text-white px-4 py-2 rounded">
+      {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connect Coinbase Wallet'}
+    </button>
+  );
+}
