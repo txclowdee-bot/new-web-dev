@@ -324,3 +324,22 @@ export default function Features() {
     </div>
   );
 }
+export default function TokenOverview() {
+  return (
+    <section className="mt-12 bg-white p-6 rounded shadow">
+      <h2 className="text-2xl font-bold">About Metis (neutral overview)</h2>
+      <p className="mt-4 text-gray-700">
+        This section provides a factual, neutral overview of the Metis token and its technology. Use official documentation and on-chain explorers for authoritative data.
+      </p>
+      <ul className="list-disc ml-6 mt-3 text-gray-600">
+        <li>Tokenomics summary (supply, circulating supply) — verify from blockchain explorers (e.g., Etherscan).</li>
+        <li>Layer-2 or scaling features — refer to official Metis docs and whitepapers for details.</li>
+        <li>Risks and volatility information — crypto assets are high risk and can lose value.</li>
+      </ul>
+
+      <div className="mt-4 text-sm text-yellow-700 bg-yellow-50 p-3 rounded">
+        Important: This site does not give investment advice. Consult a licensed financial advisor before making investment decisions.
+      </div>
+    </section>
+  );
+}
