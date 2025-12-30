@@ -210,3 +210,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   return res.status(200).json({ status: 'received', note: 'Implement persistent storage and security before production.' });
 }
+import Link from 'next/link';
+
+export default function Navbar() {
+  return (
+    <nav className="bg-white shadow">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-3">
+          <img src="/logo.svg" alt="logo" className="w-10 h-10" />
+          <span className="font-bold">MetisFutures</span>
+        </Link>
+        <div className="space-x-4">
+          <Link href="/contact" className="text-sm text-gray-700">Contact</Link>
+          <a href="#" className="text-sm text-gray-700">Privacy</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
