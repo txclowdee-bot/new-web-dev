@@ -343,3 +343,40 @@ export default function TokenOverview() {
     </section>
   );
 }
+// NOTE: THESE 20 ENTRIES ARE PLACEHOLDERS for layout only.
+// DO NOT publish these as real reviews. Replace with real, consented testimonials.
+
+type Review = {
+  id: number;
+  title: string;
+  author: string;
+  role: string;
+  content: string;
+};
+
+const sampleReviews: Review[] = Array.from({ length: 20 }).map((_, i) => ({
+  id: i + 1,
+  title: `Placeholder review #${i + 1}`,
+  author: `Reviewer ${i + 1} (placeholder)`,
+  role: 'Role: Industry Professional (placeholder)',
+  content:
+    'This is a placeholder testimonial for layout. Replace with a real, verified review from a consenting user. Do not rely on placeholder content for investment decisions.'
+}));
+
+export default function Reviews() {
+  return (
+    <section className="mt-12">
+      <h3 className="text-xl font-bold">User Reviews (placeholders)</h3>
+      <p className="text-sm text-gray-600 mt-1">All items shown here are sample placeholders — do not treat as endorsements.</p>
+      <div className="grid md:grid-cols-2 gap-4 mt-4">
+        {sampleReviews.map((r) => (
+          <article key={r.id} className="bg-white p-4 rounded shadow">
+            <div className="text-sm text-gray-800 font-semibold">{r.title}</div>
+            <div className="text-xs text-gray-500">{r.author} • {r.role}</div>
+            <p className="mt-2 text-gray-700 text-sm">{r.content}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
