@@ -191,3 +191,22 @@ export default function Contact() {
     </>
   );
 }
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+// Simple contact endpoint skeleton. You MUST implement secure validation, rate limiting,
+// persistent storage, and privacy handling before production use.
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+  const { name, email, message } = req.body ?? {};
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Missing fields' });
+  }
+
+  // WARNING: This example only logs to server console. Replace with secure storage.
+  console.log('Contact submission (example only):', { name, email, message });
+
+  return res.status(200).json({ status: 'received', note: 'Implement persistent storage and security before production.' });
+}
