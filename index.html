@@ -112,3 +112,33 @@ import type { AppProps } from 'next/app';
 export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
+import Head from 'next/head';
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+import TokenOverview from '../components/TokenOverview';
+import Reviews from '../components/Reviews';
+import Disclaimer from '../components/Disclaimer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>MetisFutures — Learn, Connect, Decide</title>
+        <meta name="description" content="MetisFutures — educational site about Metis token and wallet integrations. Not financial advice." />
+      </Head>
+      <Navbar />
+      <main className="min-h-screen bg-gray-50">
+        <Hero />
+        <section className="max-w-6xl mx-auto px-6 py-12">
+          <Features />
+          <TokenOverview />
+          <Reviews />
+          <Disclaimer />
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
