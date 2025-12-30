@@ -142,3 +142,52 @@ export default function Home() {
     </>
   );
 }
+import Head from 'next/head';
+import { useState } from 'react';
+
+export default function Contact() {
+  const [status, setStatus] = useState<string | null>(null);
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+      if (res.ok) {
+        setStatus('sent');
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Contact — MetisFutures</title>
+      </Head>
+      <div className="max-w-3xl mx-auto px-6 py-16">
+        <h1 className="text-3xl font-bold">Contact</h1>
+        <p className="mt-2 text-gray-600">Use this form to reach out. Submissions are not stored persistently until you implement a backend.</p>
+
+        <form onSubmit={submit} className="mt-6 grid gap-4">
+          <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Name" className="p-3 border rounded" />
+          <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email" className="p-3 border rounded" />
+          <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Message" className="p-3 border rounded h-36" />
+          <div className="flex items-center space-x-4">
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Send</button>
+            <div className="text-sm text-gray-600">{status === 'sending' ? 'Sending...' : status === 'sent' ? 'Sent — thank you' : status === 'error' ? 'Error — try again' : null}</div>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+}
