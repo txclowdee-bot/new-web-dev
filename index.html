@@ -306,3 +306,21 @@ export default function ConnectButton() {
     </button>
   );
 }
+export default function Features() {
+  return (
+    <div className="grid md:grid-cols-3 gap-6 mt-10">
+      <div className="p-6 bg-white rounded shadow">
+        <h3 className="font-semibold">Educational Content</h3>
+        <p className="mt-2 text-sm text-gray-600">Clear explainers about Metis token architecture, use-cases, and on-chain metrics (neutral and factual).</p>
+      </div>
+      <div className="p-6 bg-white rounded shadow">
+        <h3 className="font-semibold">Wallet Integration</h3>
+        <p className="mt-2 text-sm text-gray-600">Connect via Coinbase Wallet for viewing balances and experimenting with testnets (never share private keys).</p>
+      </div>
+      <div className="p-6 bg-white rounded shadow">
+        <h3 className="font-semibold">Verified Reviews (Placeholders)</h3>
+        <p className="mt-2 text-sm text-gray-600">This starter uses placeholders for layout. Replace with verified, consented testimonials before publishing.</p>
+      </div>
+    </div>
+  );
+}
